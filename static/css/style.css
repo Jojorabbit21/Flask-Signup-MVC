@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  width: 100vw;
+  max-width: 100%;
+  height: 100vh;
+  max-height: 100%;
+
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 40%;
+  height: 70%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-modal {
+  width: 40%;
+  height: 100%;
+  padding: 5% 8%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 14px 2px rgba(0,0,0,0.05);
+  display:block;
+}
+
+.signup-header {
+  width: 100%;
+  top: 0;
+}
+.signup-header h1 {
+  font-weight: 200;
+}
+
+.signup-body {
+  width: 100%;
+}
+
+.form-group {
+  width: 100%;
+  height: 7vh;
+  margin: 10% 0;
+}
+
+label, input {
+  display: block;
+}
+
+label {
+  font-size: 13px;
+  color: gray;
+}
+
+input {
+  width: 90%;
+  height: 90%;
+  border-width: 1px;
+  border-color: rgb(226, 226, 226);
+  border-style: solid;
+  border-radius: 6px;
+  padding: 0 5%;
+  outline: none;
+  margin-top: 2%;
+}
+
+button[type='submit'] {
+  width: 100%;
+  height: 7vh;
+  box-shadow: rgba(255, 255, 255, 0.3) 0 2px 0 0 inset;
+  border-width: 1px;
+  border-color: dodgerblue;
+  border-style: solid;
+  border-radius: 6px;
+  background-color:dodgerblue;  
+  display: inline-block;
+
+  color: white;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+button:focus {
+  background-color:seagreen;
+}
