@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+  font-size: 12px;
+}
 
 body {
   margin: 0;
@@ -24,62 +29,82 @@ body {
 }
 
 .container {
-  width: 40%;
-  height: 70%;
+  width: 36rem;
+  height: auto;
   background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .signup-modal {
-  width: 40%;
-  height: 100%;
-  padding: 5% 8%;
+  width: 30rem;
+  height: auto; 
+  padding: 2rem 4rem;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 0 14px 2px rgba(0,0,0,0.05);
-  display:block;
 }
 
 .signup-header {
   width: 100%;
+  height: 4rem;
   top: 0;
+  text-align: center;
 }
 .signup-header h1 {
-  font-weight: 200;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
 }
 
 .signup-body {
   width: 100%;
+  height: auto;
+}
+
+.signup-submit {
+  width: 100%;
+  height: 10rem;
+  /* background-color:cadetblue; */
 }
 
 .form-group {
   width: 100%;
-  height: 7vh;
-  margin: 10% 0;
-}
-
-label, input {
-  display: block;
+  margin: 6% 0;
 }
 
 label {
   font-size: 13px;
   color: gray;
+  outline: none;
 }
 
-input {
-  width: 90%;
-  height: 90%;
+input[type='checkbox'] {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 10px;
+}
+
+input[type='checkbox']:focus {
+  background-color:goldenrod;
+  border-color:orange;
+  border-width: 1.2px;
+}
+
+input[type='text'], input[type='password'], input[type='email'] {
+  margin-top: 3%;
+  padding-left: 5%;
+  width: 95%;
+  max-width: 100%;
+  height: 5vh;
   border-width: 1px;
   border-color: rgb(226, 226, 226);
   border-style: solid;
   border-radius: 6px;
-  padding: 0 5%;
   outline: none;
-  margin-top: 2%;
+}
+
+input:focus {
+  border-width: 1px;
+  border-color: dodgerblue;
+  box-shadow: 0 0 5px rgb(100, 178, 255);
 }
 
 button[type='submit'] {
@@ -99,5 +124,9 @@ button[type='submit'] {
 }
 
 button:focus {
-  background-color:seagreen;
+  background-color:rgb(0, 97, 194);
+}
+
+.agreement {
+  margin-bottom: 1.6rem;
 }
