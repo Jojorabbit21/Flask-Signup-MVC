@@ -7,11 +7,12 @@
     </head>
 
 <body>
+
   <div class="background">
     <div class="container">
       <div class="signup signup-modal">
         <div class="signup signup-header">
-            <h1>Sign up with your Email</h1>
+            <h1>Creating Account</h1>
         </div>
         <div class="signup signup-body">
           <form method="POST" >   <!--엑션 삭제해야됌--> 
@@ -19,41 +20,41 @@
               <div class="form-group">
                   <!-- <label for="userid">아이디</label>
                   <input type="text" class="form-control" id="userid" placeholder="아이디" name="userid" /> -->
-                  {{form.userid.label("First Name")}}
+                  {{form.userid.label("Display Name")}}
                   {{form.userid(class="form-control")}}
+                  <span class='info'>Display name have 16 letters limit. No special letters allowed.</span>
               </div>
               <div class="form-group">
                   <!-- <label for="username">이름</label>
                   <input type="text" class="form-control" id="username" placeholder="사용자이름" name="username" /> -->
-                  {{form.username.label("Last Name")}}
+                  {{form.username.label("Your Full Name")}}
                   {{form.username(class="form-control")}}
+                  <div class='warning warning-bar'>
+                    <span class='warning-text'></span>
+                  </div>
               </div>
               <div class="form-group">
                   <!-- <label for="password">비밀번호</label>
                   <input type="password" class="form-control" id="password" placeholder="비밀번호" name="password" /> -->
                   {{form.password.label("Password")}}
-                  {{form.password(class="form-control")}}
-                  <div class="password-verify pv-head">
-                    Your Password must include:
-                    <div class='password-verify pv-01'>
-                      More than one Capital Letters
+                  {{form.password (id='password', class="form-control")}}
+                  <div class='pw-meter'>
+                    <div class='pw-meter-header'>
+                      <div class='pw-meter-bar-bg'>
+                        <div class='pw-meter-bar'></div>
+                      </div>
+                      <span class='pw-meter-text'></span>
                     </div>
-                    <div class='password-verify pv-02'>
-                      More than one Numbers
-                    </div>
-                    <div class='password-verify pv-03'>
-                      More than one Special Letters
-                    </div>                    
-                    <div class='password-verify pv-04'>
-                      8-16 Letters
-                    </div>
+                    <span class='pw-meter-info'>Your Password must contain more than 1 capital letter, 1 special letter, 1 number,
+                      and must between 8-24 letters.
+                    </span>
                   </div>
               </div>
               <div class="form-group">
                   <!-- <label for="re-password">비밀번호 확인</label>
                   <input type="password" class="form-control" id="re_password" placeholder="비밀번호 확인" name="re-password" /> -->
                   {{form.email.label("Email")}}
-                  {{form.email  (class="form-control")}}
+                  {{form.email  (id='email', class="form-control")}}
               </div>
           </form>
         </div>
@@ -67,5 +68,11 @@
       </div>
     </div>
   </div>
+
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+
+
 </body>
 </html>
