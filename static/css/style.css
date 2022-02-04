@@ -27,6 +27,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-image: url("/static/image/background.png");
+  background-size: cover;
+  position: absolute;
 }
 
 .container {
