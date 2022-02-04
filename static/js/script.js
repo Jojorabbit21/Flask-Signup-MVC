@@ -1,19 +1,20 @@
+/*
 function validatePassword (pw, options) {
-  /*
+  
     Password Validator 0.1
     (c) 2007 Steven Levithan 
     MIT License
-  */
+  
  
   // default options (allows any password)
   var o = {
     lower: 0,
     upper: 0,
-    alpha: 0, /* lower + upper */
+    alpha: 0,
     numeric: 0,
     special: 0,
     length: [0, Infinity],
-    custom: [/*regexes and/or functions*/],
+    custom: [],
     badWords: [],
     badSequenceLength: 0,
     noQwertySequences: false,
@@ -90,17 +91,31 @@ function validatePassword (pw, options) {
   // Success
   return true;
 }
-
-function validateDisplayName(value) {
-  let regExp = /^[ㄱ-힣a-zA-Z0-9]{4,16}$/g; // Ko+Eng only
-  return regExp.test(value);
-} 
+*/
 
 // Validity
-var validity = [false, false, false, false];
+// Displayname, Fullname, Password, Email, Dateofbirth, Agreement
+var validity = {
+  'dname':false,
+  'fname':false,
+  'pw':false,
+  'email':false,
+  'dob':false,
+  'agree':false
+};
+var termsAgreed = false;
+
+// Email Validation Variables
+let email = document.getElementById('email');
 
 // Displayname Validation Variables
 let userName = document.getElementById('userid');
+
+// Fullname Validation Variables
+let fullName = document.getElementById('username');
+
+// Date Validation Variables
+let birth = document.getElementById('birth');
 
 // Password Validation Variables
 let timeout;
@@ -111,8 +126,11 @@ let strengthBox = document.getElementsByClassName('pw-meter')[0];
 let strengthText = document.getElementsByClassName('pw-meter-text')[0];
 let strengthBadge = document.getElementsByClassName('pw-meter-bar')[0];
 
+// Checkbox
+let checkbox = document.getElementById('checkbox');
+
 // Validate Password
-function checkPassword(password) {
+function validatePassword(password) {
   if(strongPassword.test(password)) {
     strengthBadge.style.backgroundImage = 'linear-gradient(to right, #0bab64, #3bb78f)';
     strengthBadge.style.width = '100%';
@@ -133,25 +151,133 @@ function checkPassword(password) {
   }
 }
 
+// Validate Display Name
+function validateDisplayName(value) {
+  let regExp = /^[ㄱ-힣a-zA-Z0-9]{4,16}$/g; // Ko+Eng+Numbers only
+  return regExp.test(value);
+}
 
+// Validate Full Name
+function validateName(value) {
+  let regExp = /^[ㄱ-힣a-zA-Z ]{2,30}$/; // KO+EN Only
+  return regExp.test(value);
+}
 
-//= Event Listeners
+// Validate Email
+function validateEmail(value) {
+  // let regExp = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+  let regExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if(regExp.test(value)){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+function setValidity(i, type=Boolean) {
+  if (i in validity) { 
+    validity[i] = type;
+    count = 0;
+    for(var v in validity) {
+      if (validity[v]==true) {
+        count ++;
+      }
+    }
+    if(count == Object.keys(validity).length) {
+      var submit = document.getElementById('submit');
+      console.log('All conditions fulfilled');
+      submit.setAttribute('status','filled');
+    }
+  }
+}
+
+//==================================================================== Event Listeners
 // Display name Event Listener
+userName.addEventListener('focus', () => {
+  var info = document.getElementsByClassName('dname-info')[0];
+  info.style.display = 'block';
+});
+
 userName.addEventListener('blur', () => {
+  var info = document.getElementsByClassName('dname-info')[0];
   var con = validateDisplayName(userName.value);
-  console.log(con);
+  info.style.display = 'none';
+  if(con && userName.value.length > 0) {
+    setValidity('dname',true);
+  }
+});
+
+// Full Name Event Listener
+fullName.addEventListener('blur', () => {
+  var con = validateName(fullName.value);
+  if(con && fullName.value.length > 0) {
+    setValidity('fname',true);
+  }
 });
 
 // Password Event Listener
 password.addEventListener('input', () => {
-  console.log("password event occured");
   clearTimeout(timeout);
-  timeout = setTimeout(() => checkPassword(password.value), 100);
-
+  timeout = setTimeout(() => validatePassword(password.value), 100);
   if(password.value.length !== 0){
     strengthBox.style.display = 'block';
   }
   else {
     strengthBox.style.display = 'none';
+  }
+});
+
+password.addEventListener('blur', () => {
+  if(password.value.length > 0)
+    setValidity('pw',true);
+});
+
+// Email Event Listener
+email.addEventListener('focus', () => {
+  var info = document.getElementsByClassName('email-info')[0];
+  info.style.display = 'none';
+});
+
+email.addEventListener('blur', () => {
+  if(email.value.length > 0) {
+    var con = validateEmail(email.value);
+    var info = document.getElementsByClassName('email-info')[0];
+    if(!con) {
+      info.style.display = 'block';
+      info.innerHTML = 'Wrong Email Address';
+    }
+    else {
+      setValidity('email', true);
+    }
+  } 
+});
+
+birth.addEventListener('focus', () => {
+  birth.style.color = "black";
+});
+
+birth.addEventListener('blur', () => {
+  var info = document.getElementsByClassName('birth-info')[0];
+  if(birth.value.length > 0) {
+    info.style.display = 'block';
+    birth.style.color='black';
+    setValidity('dob', true);
+  }
+  else {
+    info.style.display = 'none';
+    birth.style.color= 'rgb(190,190,190)';
+  }
+}) 
+
+// Checkbox Event Listener
+checkbox.addEventListener('click', () => {
+  var label = document.getElementsByClassName('checkbox-label')[0];
+  if (checkbox.checked) {
+    label.style.color = 'dodgerblue';
+    setValidity('agree', true);
+  }
+  else{
+    label.style.color = 'gray';
   }
 });

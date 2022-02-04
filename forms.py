@@ -1,6 +1,6 @@
 from tokenize import String
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField
+from wtforms import StringField, PasswordField, EmailField, DateField
 from wtforms.validators import DataRequired, EqualTo
 
 class RegisterForm(FlaskForm):
@@ -8,4 +8,5 @@ class RegisterForm(FlaskForm):
   username = StringField('username', validators=[DataRequired()])
   password = PasswordField('password', validators=[DataRequired()])
   email = EmailField('email', validators=[DataRequired()])
+  birth = DateField('birth', validators=[DataRequired()])
   

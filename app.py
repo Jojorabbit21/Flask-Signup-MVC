@@ -20,6 +20,7 @@ def register():
     fcuser.username = form.data.get('username')
     fcuser.password = form.data.get('password')
     fcuser.email = form.data.get('email')
+    fcuser.birth = form.data.get('birth')
     
     db.session.add(fcuser)
     db.session.commit()
